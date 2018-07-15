@@ -6,6 +6,24 @@ RSpec.describe ArticlesController, type: :request do
   let!(:articles) { create_list(:article, 10) }
   let(:article_id) { articles.first.id }
 
+  describe 'GET /search' do
+    context 'when it matches all values' do
+      before { get '/articles/search?location=Manhattan' }
+
+      it 'returns all articles' do
+        expect(json).not_to be_empty
+      end
+    end
+
+    context 'when it not matches all values' do
+      before { get '/articles/search?search=Manhattan' }
+
+      it 'returns all articles' do
+        expect(json).to be_empty
+      end
+    end
+  end
+
   describe 'GET /articles' do
     before { get '/articles' }
 
