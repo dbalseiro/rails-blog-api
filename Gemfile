@@ -51,5 +51,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem "geocoder", "~> 1.4"
 gem "devise_token_auth", "~> 0.1", ">= 0.1.43"
+gem 'omniauth-github'
