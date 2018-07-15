@@ -2,6 +2,7 @@
 
 class ArticlesController < ApplicationController
   before_action :fetch_article, only: [:show , :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @articles = Article.all
