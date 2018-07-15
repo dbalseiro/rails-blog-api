@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :fetch_article, only: [:show, :edit, :update, :destroy]
+  before_action :fetch_article, only: [:show , :update, :destroy]
 
   def index
     @articles = Article.all
@@ -16,8 +16,6 @@ class ArticlesController < ApplicationController
   def show
     json_response(@article)
   end
-
-  def edit; end
 
   def create
     @article = Article.create! article_params
