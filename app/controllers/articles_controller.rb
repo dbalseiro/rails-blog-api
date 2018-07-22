@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+
   before_action :fetch_article, only: [:show , :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @articles = Article.all
