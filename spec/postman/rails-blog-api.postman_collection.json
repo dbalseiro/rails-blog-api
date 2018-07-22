@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "c1161421-8306-1a91-0554-2c74b15c6d9f",
+		"name": "rails-blog-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create-article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "258a4a90-4100-4496-be27-3ef57e665fa5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "access-token",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "token-type",
+						"value": "{{tokenType}}"
+					},
+					{
+						"key": "expiry",
+						"value": "{{expiry}}"
+					},
+					{
+						"key": "client",
+						"value": "{{client}}"
+					},
+					{
+						"key": "uid",
+						"value": "{{uid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"article\": {\n    \"title\": \"Titulo 4\",\n    \"body\": \"body del article\",\n    \"city\": \"New York\",\n    \"state\": \"NY\"\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch-article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13975a41-0894-4135-9536-9460f3a538db",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "access-token",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "token-type",
+						"value": "{{tokenType}}"
+					},
+					{
+						"key": "expiry",
+						"value": "{{expiry}}"
+					},
+					{
+						"key": "client",
+						"value": "{{client}}"
+					},
+					{
+						"key": "uid",
+						"value": "{{uid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"article\": {\n    \"title\": \"Titulo 1\",\n    \"body\": \"body del article\",\n    \"city\": \"New York\",\n    \"state\": \"NY\"\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae16c84a-d3ff-44ec-8eec-2233f2577b8b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "access-token",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "token-type",
+						"value": "{{tokenType}}"
+					},
+					{
+						"key": "expiry",
+						"value": "{{expiry}}"
+					},
+					{
+						"key": "client",
+						"value": "{{client}}"
+					},
+					{
+						"key": "uid",
+						"value": "{{uid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/articles/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e9bd539-8de7-47d0-815d-41bde8b47760",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "access-token",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "token-type",
+						"value": "{{tokenType}}"
+					},
+					{
+						"key": "expiry",
+						"value": "{{expiry}}"
+					},
+					{
+						"key": "client",
+						"value": "{{client}}"
+					},
+					{
+						"key": "uid",
+						"value": "{{uid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"article\": {\n    \"title\": \"Titulo 3\",\n    \"body\": \"body del article\",\n    \"city\": \"New York\",\n    \"state\": \"NY\"\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"comment\": {\n    \"commenter\": \"Diego\",\n    \"body\": \"body del comment\",\n    \"human\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles/2/comments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch-comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "22f6e93d-8e75-4685-ba3d-89f6847ef0fc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"comment\": {\n    \"commenter\": \"Diego\",\n    \"body\": \"body del comment\",\n    \"human\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles/2/comments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80cc67b9-c7cb-4b50-ae47-2bf1ffd7df6a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"comment\": {\n    \"commenter\": \"Diego\",\n    \"body\": \"body del comment\",\n    \"human\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles/2/comments/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"2",
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc846bef-ed93-4abb-a7be-dceff9378571",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"comment\": {\n    \"commenter\": \"Diego\",\n    \"body\": \"body del comment\",\n    \"human\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/articles/2/comments/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"articles",
+						"2",
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin-user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c740e17c-80cf-4360-aee6-db729b93a27d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{userEmail}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{userPassword}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/auth/sign_in",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58ef8149-1c5e-48a2-a9cc-38aeb185dc7d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"correct headers\", function () {",
+							"    pm.response.to.have.header(\"access-token\");",
+							"    pm.response.to.have.header(\"client\");",
+							"    pm.response.to.have.header(\"expiry\");",
+							"    pm.response.to.have.header(\"token-type\");",
+							"    pm.expect(postman.getResponseHeader(\"uid\")).to.be.equal('user@example.com');",
+							"});",
+							"",
+							"pm.environment.set(\"accessToken\", postman.getResponseHeader(\"access-token\"));",
+							"pm.environment.set(\"client\", postman.getResponseHeader(\"client\"));",
+							"pm.environment.set(\"expiry\", postman.getResponseHeader(\"expiry\"));",
+							"pm.environment.set(\"tokenType\", postman.getResponseHeader(\"token-type\"));",
+							"pm.environment.set(\"uid\", postman.getResponseHeader(\"uid\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{userEmail}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{userPassword}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "{{userPassword}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/auth",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
