@@ -6,9 +6,15 @@ RSpec.describe ArticlesController, type: :request do
   let!(:articles) { create_list(:article, 10) }
   let(:article_id) { articles.first.id }
 
+  before(:each) do
+    @user = create :user
+    login @user
+    @auth_headers = get_auth_headers
+  end
+
   describe 'GET /search' do
     context 'when it matches all values' do
-      before { get '/articles/search?location=Manhattan' }
+      before { get '/articles/search?location=Manhattan', headers: @auth_headers }
 
       it 'returns all articles' do
         expect(json).not_to be_empty
@@ -16,7 +22,7 @@ RSpec.describe ArticlesController, type: :request do
     end
 
     context 'when it not matches all values' do
-      before { get '/articles/search?search=Manhattan' }
+      before { get '/articles/search?search=Manhattan', headers: @auth_headers}
 
       it 'returns all articles' do
         expect(json).to be_empty
@@ -25,7 +31,7 @@ RSpec.describe ArticlesController, type: :request do
   end
 
   describe 'GET /articles' do
-    before { get '/articles' }
+    before { get '/articles', headers: @auth_headers }
 
     it 'returns all articles' do
       expect(json).not_to be_empty
@@ -38,7 +44,7 @@ RSpec.describe ArticlesController, type: :request do
   end
 
   describe 'GET /articles/:id' do
-    before { get "/articles/#{article_id}" }
+    before { get "/articles/#{article_id}", headers: @auth_headers }
 
     context 'when the record exists' do
       it 'returns the article' do
@@ -69,7 +75,11 @@ RSpec.describe ArticlesController, type: :request do
     let(:invalid_article) { attributes_for :invalid_article }
 
     context 'when the record is valid' do
-      before { post '/articles', params: { article: valid_article } }
+      before do
+        post '/articles',
+             params: { article: valid_article },
+             headers: @auth_headers
+      end
 
       it 'creates an article' do
         expect(Article.all.size).to eq(11)
@@ -81,7 +91,11 @@ RSpec.describe ArticlesController, type: :request do
     end
 
     context 'when the record is invalid' do
-      before { post '/articles', params: { article: invalid_article } }
+      before do
+        post '/articles',
+             params: { article: invalid_article },
+             headers: @auth_headers
+      end
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -98,7 +112,11 @@ RSpec.describe ArticlesController, type: :request do
     let(:invalid_update) { attributes_for :article, title: '123' }
 
     context 'when the record is valid' do
-      before { put "/articles/#{article_id}", params: { article: valid_update } }
+      before do
+        put "/articles/#{article_id}",
+            params: { article: valid_update },
+            headers: @auth_headers
+      end
 
       it 'updates an article' do
         expect(Article.find(article_id).title).to eq('123456')
@@ -110,7 +128,11 @@ RSpec.describe ArticlesController, type: :request do
     end
 
     context 'when the record is invalid' do
-      before { put "/articles/#{article_id}", params: { article: invalid_update } }
+      before do
+        put "/articles/#{article_id}",
+            params: { article: invalid_update },
+            headers: @auth_headers
+      end
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -123,7 +145,7 @@ RSpec.describe ArticlesController, type: :request do
   end
 
   describe 'DELETE /articles/:id' do
-    before { delete "/articles/#{article_id}" }
+    before { delete "/articles/#{article_id}", headers: @auth_headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
