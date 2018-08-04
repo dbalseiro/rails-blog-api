@@ -5,10 +5,11 @@ class Article < ApplicationRecord
 
   has_many :comments, dependent: :destroy, inverse_of: :article
   validates :title, presence: true, length: { minimum: 5 }
+
   geocoded_by :full_address
   after_validation :geocode
 
-  scope :by_title, ->(title) { where('title like ?', "%#{title}%") if title.present? }
+  scope :by_title, ->(title) { where('title LIKE ?', "%#{title}%") if title.present? }
   scope :by_text, ->(text) { where('text like ?', "%#{text}%") if text.present? }
   scope :by_location, ->(location) { near(location, 20) if location.present? }
   scope :by_description, ->(description) { by_text(description).or by_title(description) }

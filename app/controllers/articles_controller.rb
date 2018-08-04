@@ -1,33 +1,37 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  include DeviseTokenAuth::Concerns::SetUserByToken
-
   before_action :fetch_article, only: [:show , :update, :destroy]
   before_action :authenticate_user!
 
   def index
-    @articles = Article.all
-    json_response(@articles)
+    render json: Article.all
   end
 
   def search
     @articles = Article.search(*search_params)
-    json_response(@articles)
+    render json: @articles
   end
 
   def show
-    json_response(@article)
+    render json: @article # How to include the comments of an article
   end
 
   def create
-    @article = Article.create! article_params
-    json_response(@article, :created)
+    @article = Article.new(article_params)
+    if @article.save
+      render json: @article, status: :created
+    else
+      render json: @article.errors, status: :unprocessable_entity
+    end
   end
 
   def update
-    @article.update! article_params
-    head :no_content
+    if @article.update(article_params)
+      render json: @article
+    else
+      render json: @article.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy

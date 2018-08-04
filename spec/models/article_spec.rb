@@ -1,12 +1,13 @@
 require 'rails_helper'
 
+
 RSpec.configure do |c|
   c.use_transactional_examples = true
 end
 
 RSpec.describe Article, type: :model do
   it 'is valid with valid attributes' do
-    article = build :article
+    article = build(:article)
     expect(article).to be_valid
   end
 
@@ -20,8 +21,9 @@ RSpec.describe Article, type: :model do
     expect(article).not_to be_valid
   end
 
-  describe '.full_address' do
+  describe '#full_address' do
     let(:article) { Article.new }
+
     context 'when the article is empty' do
       it 'returns an empty address' do
         expect(article.full_address).to eq ', , '

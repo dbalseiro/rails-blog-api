@@ -14,13 +14,17 @@ module AuthenticationHelper
   end
 
   def get_auth_headers
-    auth_params = {
+    {
       'access-token' => response.headers['access-token'],
       'client' => response.headers['client'],
       'uid' => response.headers['uid'],
       'expiry' => response.headers['expiry'],
       'token_type' => response.headers['token_type']
     }
-    auth_params
+  end
+
+  # This is the good one
+  def auth_headers_for(user)
+    user.create_new_auth_token
   end
 end
